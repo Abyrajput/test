@@ -1,0 +1,88 @@
+<div class="custom-feature-slider">
+    {% if section.settings.title != blank %}
+    <header class="section-header category-btn-box aos-init aos-animate" data-aos="">
+    <div class="main-h">
+    <h2 class="section-header__title appear-delay">
+    {{ section.settings.title }}
+    </h2>
+    </div><div class="rte section-header__description section-header__description--large appear-delay-1">
+    {{ section.settings.description }}
+    </div>
+    </header>
+    {% endif %}
+
+    <div class="main-section-div">
+      <div class="images">
+        
+      </div>
+    </div>
+  
+</div>
+
+{% schema %}
+{
+  "name": "Custom featured slider",
+  "class": "to-btm-mg-common",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.featured-collection-slider.settings.title.label",
+      "default": "Featured New Slider"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "t:sections.featured-collection-slider.settings.description.label"
+    },
+    {
+    "id": "link",
+    "type": "url",
+    "label": "Link URL"
+    },
+    {
+    "id": "linktext",
+    "type": "text",
+    "label": "Link text",
+    "default": "Click here"
+    },
+    {
+      "type": "collection",
+      "id": "home_featured_products",
+      "label": "t:sections.featured-collection-slider.settings.home_featured_products.label"
+    },
+    {
+      "type": "select",
+      "id": "per_row",
+      "label": "t:sections.featured-collection-slider.settings.per_row.label",
+      "default": "small",
+      "options": [
+        {
+          "value": "small",
+          "label": "3"
+        },
+        {
+          "value": "medium",
+          "label": "4"
+        },
+        {
+          "value": "large",
+          "label": "5"
+        }
+      ],
+      "info": "t:sections.featured-collection-slider.settings.per_row.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "alt",
+      "label": "t:sections.featured-collection-slider.settings.alt.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Featured Slider"
+    }
+  ],
+  "blocks": []
+}
+{% endschema %}

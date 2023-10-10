@@ -1,0 +1,109 @@
+{{ '//ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' | script_tag }}
+{{ 'jquery.products.min.js' | asset_url | script_tag }}
+{{ 'shopify-money.js' | asset_url | script_tag }}
+<div class="wrapper recently-viewed-product">
+
+  <div class="section-header ">
+    {% if section.settings.product_recently_heading != blank %}
+    <div class="wrapper recently-viewed-product">
+      <div class="section-header ">
+        <h2 class="h1 section-header__title">{{ section.settings.product_recently_heading }}</h2>
+      </div>
+    </div>
+    {% endif %}
+    <div id="recently-viewed-products" class="grid-uniform collection clearfix  slide-recent-v"></div>
+  </div>
+
+{% raw %}
+
+<script id="recently-viewed-product-template"  type="text/x-jquery-tmpl">
+<div class="grid__item grid-product  small--one-half medium--one-half large--one-quarter">
+<div id="product-${handle}" class="product">
+<div class="product-design">
+  <a href="${url}">
+<div class="image">
+<img loading="lazy" class="product_img ss" src="${Shopify.Products.resizeImage(featured_image, "360x")}" alt="${title}"/>
+
+</div>
+<div class="details">
+
+
+<span class="title">${title}</span>
+ <br>
+<span class="price">{{if price_varies}}From {{/if}}${Shopify.formatMoney(price)}</span>
+<!-- <div class="add-to-cart-btn">
+      <button type="button" data-use-primary-button="false" data-vid="${variants[0].id}" class="ProductForm__AddToCart_custom_recently_view ProductForm__AddToCart Button Button--secondary Button--full" data-action="add-to-cart"><span>Add to cart</span></button>
+      </div> -->
+</a>
+</div>
+</div>
+</div>
+</div>
+</script>
+{% endraw %}
+
+<script>
+Shopify.Products.showRecentlyViewed( { howManyToShow:8 } );
+  destroyCarousel()
+  slickCarousel();
+  setTimeout(function(){
+  destroyCarousel()
+  slickCarousel();
+  },4000);
+  function slickCarousel() {
+    $('.slide-recent-v').slick({
+      infinite: true,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      
+  responsive: [
+        {
+          breakpoint: 767,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            adaptiveHeight: true,
+          },
+        }
+      ],
+
+    });
+  }
+  function destroyCarousel() {
+    if ($('.slide-recent-v').hasClass('slick-initialized')) {
+      $('.slide-recent-v').slick('destroy');
+    }      
+  }
+setInterval(function(){
+$('#recently-viewed-products').find('.price').each(function() {
+     var text = $(this).text();
+    text = text.replace("$", "Rs. ");
+    $(this).text(text);
+    
+        
+    });
+  },2000)
+</script>
+  
+  
+{% schema %}
+{
+  "name": "Product recentlyview",
+  "class": "rrecentlyview-main",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_product_recently",
+      "label": "Show Recently Product",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "product_recently_heading",
+      "label": "Product recently heading",
+      "default": "Recently View"
+    } 
+  ]
+}
+{% endschema %}
+

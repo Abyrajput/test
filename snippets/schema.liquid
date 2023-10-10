@@ -1,0 +1,72 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name }}",
+  "url": "{{ shop.url }}",
+  "logo": "https://cdn.shopify.com/s/files/1/0404/9056/5784/files/Logo_Full_256X256_3d2ede2d-5581-404f-a7c5-1f96b6252bd2.png?v=1630535318"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "{{ shop.name }}",
+  "image": "https://cdn.shopify.com/s/files/1/0404/9056/5784/files/Logo_Full_256X256_3d2ede2d-5581-404f-a7c5-1f96b6252bd2.png?v=1630535318",
+  "@id": "",
+  "url": "{{ shop.url }}",
+  "telephone": "{{ shop.phone }}",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ shop.address.address1 }}",
+    "addressLocality": "{{ shop.address.city }}",
+    "postalCode": "{{ shop.address.zip }}",
+    "addressCountry": "{{ shop.address.country }}"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 26.993121,
+    "longitude": 75.789331
+  },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "opens": "10:00",
+    "closes": "19:00"
+  },{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": "Saturday",
+    "opens": "10:00",
+    "closes": "18:00"
+  }],
+  "sameAs": [
+    "https://www.facebook.com/gillorisocial",
+    "https://www.instagram.com/gillorisocial/",
+    "https://in.pinterest.com/gillorisocial/"
+  ] 
+}
+</script>
+
+ <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "{{ shop.url }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://gillori.com/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>

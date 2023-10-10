@@ -1,0 +1,86 @@
+
+<div class="index-section{% if section.settings.alt %} index-section--alt{% endif %}" id="home-page-usp">
+  <div data-aos>
+    
+<div class="usp-section page-width">
+  <div class="new-container padding-container">
+  	 {%- if section.settings.title != blank -%}
+        <header class="section-header category-btn-box">
+          <div class="main-h">
+            <h2 class="section-header__title appear-delay">
+            {{ section.settings.title }}
+            </h2> 
+          </div>
+        </header>
+    {%- endif -%}
+    
+    <div class="usp-icon-section">
+      {%- for block in section.blocks -%}
+      <div class="usp-box-design">
+      	<img src="{{ block.settings.image.src | img_url: "107x" }}" />
+        <div class="content">
+        	<p>{{ block.settings.icon-name }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    
+  </div>
+</div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Usp Icon",
+    "class": "to-btm-mg-common",
+    "settings": [
+		{
+          "type": "text",
+          "id": "subheading",
+          "label": "Sub-heading",
+          "default": "Sub-heading"
+        },
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Heading"
+        }
+	],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Usp Icon",
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Image"
+        },
+		{
+          "type": "text",
+          "id": "icon-name",
+          "label": "Icon Name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Image",
+      "name": "Uspp Icon",
+      "blocks": [
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]		
+ }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

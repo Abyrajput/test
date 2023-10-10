@@ -1,0 +1,47 @@
+<div class="index-section video-bx{% if section.settings.alt %} index-section--alt{% endif %}">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <header class="section-header" data-aos>
+        <h2 class="section-header__title appear-delay">
+          {{ section.settings.title }}
+        </h2>
+      </header>
+    {%- endif -%}
+    <div class="video-wrapper">
+      <video autoplay muted loop playsinline>
+        <source src="{{ section.settings.video_url }}" type="video/mp4">
+        <source src="{{ section.settings.video_url }}" type="video/ogg">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.featured-video.name",
+  "class": "testimonial-bx-new",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.featured-video.settings.title.label"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "t:sections.featured-video.settings.video_url.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "alt",
+      "label": "t:sections.featured-video.settings.alt.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.featured-video.presets.video.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,145 @@
+
+<div class="index-section{% if section.settings.alt %} index-section--alt{% endif %}" id="custom-text-new">
+  <div data-aos>
+
+      <div class="page-width">
+    {%- if section.settings.title != blank -%}
+        <header class="section-header category-btn-box">
+          <div class="main-h">
+            <h2 class="section-header__title appear-delay">
+            {{ section.settings.title }}
+            </h2> 
+          </div>
+        </header>
+    {%- endif -%}
+
+<div class="footer-collection-content-text">
+  {% if section.settings.descripion.size > 757 %}
+    <div class="text-description-short">
+     {{ section.settings.descripion | truncate: 757, " . . . " }}<span class="readmore-text" href="#">Show More</span>
+    </div>
+    <div class="text-description-full" style="display:none;">
+    {{ section.settings.descripion }}
+    <span class="readless-text" href="#">Show Less</span>
+    </div>
+
+    {% else %}
+ {{ section.settings.descripion }}
+    
+  {% endif %}
+
+      </div>
+</div>
+  </div>
+</div>
+     <script>
+$('.readmore-text').click(function (event) {
+event.preventDefault();
+var descriptionFulltext = document.querySelector('.text-description-full');
+descriptionFulltext.style.display = 'block';
+var descriptionShorttext = document.querySelector('.text-description-short');
+descriptionShorttext.style.display = 'none';
+});
+$('.readless-text').click(function (event) {
+event.preventDefault();
+var descriptionFulltext = document.querySelector('.text-description-full');
+descriptionFulltext.style.display = 'none';
+var descriptionShorttext = document.querySelector('.text-description-short');
+descriptionShorttext.style.display = 'block';window.scrollTo({bottom: 1200, behavior: 'smooth'});
+})
+</script>
+
+
+{% schema %}
+  {
+    "name": "Custom Text",
+    "class": "to-btm-mg-common-text",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+        "type": "html",
+        "id": "descripion",
+        "label": "Description",
+        "default": "html"
+      }
+    ],
+    "presets": [
+        {
+            "name": "Custom Text",
+            "settings": {
+                "title": "Custom Text"
+            }
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+   .footer-collection-content-text .desc-tagss {
+    padding-top: 10px;
+}
+      .footer-collection-content-text .desc-tagss a {
+    color: #a00404;
+    text-decoration: underline;
+    margin: 0px 5px;
+        font-weight:500;
+}
+      
+      .footer-collection-content-text h2, .footer-collection-content-text h3{
+    font-weight: 600;
+        color: #a00404;
+        margin:10px 0 0 0;
+}
+    .footer-collection-content-text h3{
+      margin:10px 0 0 0;
+    }
+  
+  .text-description-full a{
+    font-weight:700;
+  }
+       .readmore-text {
+       color: #a00404;
+    max-width: 110px;
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+    font-weight: 600;
+        font-size:22px;
+}
+       .readless-text {
+    color: #a00404;
+    max-width: 110px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: 600;
+        font-size:22px;
+}
+      .footer-collection-content-text p {
+    color: #666666;
+    font-size: 16px;
+}
+  .to-btm-mg-common-text{ 
+    margin:70px auto; 
+  }
+  .cstm-text-cate strong {
+  color: #a00404;
+}
+.cstm-text-cate a {
+  color: #666666;
+  text-decoration: underline;
+  margin: 0px 5px;
+  font-weight: 500;
+}
+  @media screen and (max-width: 767px){
+.to-btm-mg-common-text {
+    margin: 50px auto;
+}
+  }
+      {% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

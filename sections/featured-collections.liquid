@@ -1,0 +1,216 @@
+<div class="index-section{% if section.settings.alt %} index-section--alt{% endif %}">
+  <div data-aos>
+
+    {%- if section.settings.title != blank -%}
+    <div class="page-width">
+      <header class="section-header category-btn-box">
+        <div class="main-h">
+          <h2 class="section-header__title appear-delay">
+            {{ section.settings.title }}
+          </h2>
+        </div>
+           {%- if section.settings.description != blank -%}
+            <div class="rte section-header__description section-header__description--large appear-delay-1">
+              {{ section.settings.description }}
+            </div>
+          {%- endif -%}
+      </header>
+    </div>
+    {%- endif -%}
+
+    <div class="page-width">
+      <div class="skrim-grid appear-delay-2 customcollection-slider">
+        {%- liquid
+          assign isEmpty = true
+
+          if section.blocks.size > 0
+            assign isEmpty = false
+          endif
+
+          for block in section.blocks limit: collection_limit
+            assign background_position = block.settings.focal_point
+            render 'collection-grid-item', collection: collections[block.settings.collection], image: block.settings.image
+          endfor
+        -%}
+
+        {%- if isEmpty -%}
+        <div class="page-width">
+          <div class="grid">
+            <div class="grid__item">
+              <div class="rte">
+                {{ 'home_page.onboarding.no_content' | t }}
+              </div>
+            </div>
+          </div>
+        </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+    {%- if section.settings.linktext != blank -%}
+    <div class="btn-text-center">
+      <a href="{{ section.settings.link }}">
+        <span> {{ section.settings.linktext }}</span>
+      </a>
+    </div>
+    {%- endif -%}
+  </div>
+
+</div>
+
+<script>
+ mobileOnlySlider(".customcollection-slider", true, false, 767);
+
+function mobileOnlySlider($slidername, $dots, $arrows, $breakpoint) {
+	var slider = $($slidername);
+	var settings = {
+		mobileFirst: true,
+		dots: $dots,
+		arrows: $arrows,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: true,
+        dots: false,
+        infinite: true,
+        slidesToShow: 1,
+      	centerMode: true,
+        centerPadding: '120px',
+		responsive: [
+			{
+				breakpoint: $breakpoint,
+				settings: "unslick"
+			}
+		]
+	};
+
+	slider.slick(settings);
+
+	$(window).on("resize", function () {
+		if ($(window).width() > $breakpoint) {
+			return;
+		}
+		if (!slider.hasClass("slick-initialized")) {
+			return slider.slick(settings);
+		}
+	});
+} // Mobile Only Slider
+
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.featured-collections.name",
+  "class": "to-btm-mg-common",
+  "max_blocks": 15,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.featured-collections.settings.title.label"
+    },
+    {
+    "type": "text",
+    "id": "description",
+    "label": "t:sections.featured-collection-slider.settings.description.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "alt",
+      "label": "t:sections.featured-collections.settings.alt.label"
+    },
+  {
+  "id": "link",
+  "type": "url",
+  "label": "Link URL"
+  },
+  {
+  "id": "linktext",
+  "type": "text",
+  "label": "Link text",
+  "default": "Click here"
+  }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.featured-collections.presets.collection_list.name",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "t:sections.featured-collections.blocks.collection.name",
+      "settings": [
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "t:sections.featured-collections.blocks.collection.settings.collection.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.featured-collections.blocks.collection.settings.image.label"
+        },
+        {
+          "type": "select",
+          "id": "focal_point",
+          "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.label",
+          "info": "t:sections.featured-collections.blocks.collection.settings.focal_point.info",
+          "default": "center center",
+          "options": [
+            {
+              "value": "top left",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.top_left.label"
+            },
+            {
+              "value": "top center",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.top_center.label"
+            },
+            {
+              "value": "top right",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.top_right.label"
+            },
+            {
+              "value": "center left",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.center_left.label"
+            },
+            {
+              "value": "center center",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.center_center.label"
+            },
+            {
+              "value": "center right",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.center_right.label"
+            },
+            {
+              "value": "bottom left",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.bottom_left.label"
+            },
+            {
+              "value": "bottom center",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.bottom_center.label"
+            },
+            {
+              "value": "bottom right",
+              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.bottom_right.label"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
